@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hasil Seleksi KIR 2026</title>
-    <!-- Font Awesome for icons -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        /* ===== RESET & BASE ===== */
+        /* ===== RESET & GLOBAL ===== */
         * {
             margin: 0;
             padding: 0;
@@ -17,20 +17,39 @@
         body {
             font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             background: #0a1428;
-            /* dark navy base */
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: center;
             padding: 20px;
         }
 
-        /* ===== MAIN CONTAINER ===== */
         .container {
             width: 100%;
-            max-width: 520px;
+            max-width: 560px;
             margin: 0 auto;
+            position: relative;
+        }
+
+        /* ===== PAGE WRAPPER ===== */
+        .page {
+            display: none;
+            animation: fadeSlide 0.4s ease forwards;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* ===== HEADER ===== */
@@ -122,11 +141,11 @@
             border-radius: 0 0 18px 18px;
             padding: 30px 28px 34px;
             box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
-            margin-top: 0;
             position: relative;
             z-index: 2;
         }
 
+        /* ===== FORM ===== */
         .card-title {
             font-size: 20px;
             font-weight: 700;
@@ -150,7 +169,6 @@
             padding-bottom: 16px;
         }
 
-        /* ===== FORM ===== */
         .form-group {
             margin-bottom: 20px;
         }
@@ -202,7 +220,6 @@
             font-weight: 400;
         }
 
-        /* ===== BUTTON ===== */
         .btn-submit {
             width: 100%;
             padding: 16px 20px;
@@ -236,7 +253,6 @@
             margin-right: 10px;
         }
 
-        /* ===== PDF LINK ===== */
         .pdf-link {
             display: block;
             text-align: center;
@@ -259,82 +275,163 @@
             text-decoration: underline;
         }
 
-        /* ===== RESULT BOX ===== */
-        .result-box {
-            margin-top: 24px;
-            padding: 20px 22px;
-            border-radius: 14px;
-            background: #f0f6fe;
-            border-left: 5px solid #1a4a7a;
-            display: none;
-            animation: fadeSlideIn 0.45s ease forwards;
+        /* ===== RESULT PAGE ===== */
+        .result-header {
+            text-align: center;
+            padding-bottom: 14px;
+            border-bottom: 2px dashed #dce3ed;
+            margin-bottom: 22px;
         }
 
-        .result-box.show {
-            display: block;
+        .result-header .icon-big {
+            font-size: 48px;
+            margin-bottom: 6px;
         }
 
-        .result-box.success {
-            border-left-color: #27ae60;
-            background: #eafaf1;
+        .result-header .icon-big.lulus {
+            color: #27ae60;
         }
 
-        .result-box.fail {
-            border-left-color: #e74c3c;
-            background: #fdf0ee;
+        .result-header .icon-big.tidak {
+            color: #e74c3c;
         }
 
-        .result-box .result-title {
-            font-size: 16px;
-            font-weight: 700;
+        .result-header h2 {
+            font-size: 24px;
+            font-weight: 800;
             color: #0b1a3a;
-            margin-bottom: 4px;
+            line-height: 1.3;
         }
 
-        .result-box .result-title i {
-            margin-right: 8px;
+        .result-header h2.lulus {
+            color: #1a7a3a;
         }
 
-        .result-box .result-detail {
+        .result-header h2.tidak {
+            color: #b03a2e;
+        }
+
+        .result-header .sub-head {
             font-size: 14px;
-            color: #2c3e50;
+            color: #5a6a7a;
+            margin-top: 6px;
+        }
+
+        .result-detail {
+            margin: 16px 0 20px;
+        }
+
+        .result-row {
+            display: flex;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f4fa;
+            font-size: 14px;
+        }
+
+        .result-row .label {
+            width: 120px;
+            font-weight: 600;
+            color: #1a2a4a;
+            flex-shrink: 0;
+        }
+
+        .result-row .value {
+            flex: 1;
+            color: #0b1a3a;
+            font-weight: 500;
+            word-break: break-word;
+        }
+
+        .result-row .value .highlight {
+            color: #1a4a7a;
+            font-weight: 700;
+        }
+
+        .result-extra {
+            margin-top: 20px;
+            padding: 16px 18px;
+            background: #f0f6fe;
+            border-radius: 12px;
+            border-left: 4px solid #1a4a7a;
+            font-size: 14px;
+            color: #1a2a4a;
             line-height: 1.6;
         }
 
-        .result-box .result-detail strong {
-            color: #0b1a3a;
+        .result-extra i {
+            color: #1a4a7a;
+            margin-right: 6px;
         }
 
-        .result-box .result-status {
-            display: inline-block;
-            padding: 4px 16px;
-            border-radius: 30px;
-            font-size: 13px;
-            font-weight: 700;
-            margin-top: 8px;
-            letter-spacing: 0.5px;
+        .result-extra a {
+            color: #1a4a7a;
+            font-weight: 600;
+            text-decoration: none;
         }
 
-        .result-status.lulus {
-            background: #27ae60;
+        .result-extra a:hover {
+            text-decoration: underline;
+        }
+
+        .result-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .btn-back {
+            flex: 1;
+            padding: 12px 18px;
+            background: #eef2f7;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            color: #1a2a4a;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 15px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-width: 120px;
+        }
+
+        .btn-back:hover {
+            background: #dce3ed;
+        }
+
+        .btn-pdf {
+            flex: 1;
+            padding: 12px 18px;
+            background: #c0392b;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
             color: #fff;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 15px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-width: 120px;
+            text-decoration: none;
         }
 
-        .result-status.tidak-lulus {
-            background: #e74c3c;
-            color: #fff;
+        .btn-pdf:hover {
+            background: #a93226;
         }
 
-        /* ===== ANIMATION ===== */
-        @keyframes fadeSlideIn {
-            0% {
-                opacity: 0;
-                transform: translateY(16px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* ===== NOT FOUND ===== */
+        .not-found .icon-big {
+            color: #f39c12;
+        }
+
+        .not-found h2 {
+            color: #b9770e;
         }
 
         /* ===== FOOTER ===== */
@@ -388,8 +485,37 @@
                 padding: 14px 16px;
             }
 
-            .result-box {
-                padding: 16px 18px;
+            .result-row {
+                flex-direction: column;
+                padding: 6px 0;
+            }
+
+            .result-row .label {
+                width: 100%;
+                font-size: 13px;
+                margin-bottom: 2px;
+            }
+
+            .result-row .value {
+                font-size: 14px;
+            }
+
+            .result-header h2 {
+                font-size: 20px;
+            }
+
+            .result-extra {
+                font-size: 13px;
+                padding: 14px;
+            }
+
+            .result-actions {
+                flex-direction: column;
+            }
+
+            .btn-back,
+            .btn-pdf {
+                width: 100%;
             }
         }
 
@@ -412,84 +538,105 @@
 
     <div class="container">
 
-        <!-- ===== HEADER ===== -->
-        <div class="header">
-            <div class="header-icon">
-                <i class="fas fa-flask"></i>
-            </div>
-            <h1>PENGGUMAHAN <span>KIR</span></h1>
-            <div class="sub-title">KARYA ILMIAH REMAJA</div>
-            <div class="badge"><i class="fas fa-calendar-alt"></i> 2026</div>
-        </div>
+        <!-- ============================================================ -->
+        <!-- ===== PAGE 1: FORM ===== -->
+        <!-- ============================================================ -->
+        <div id="page-form" class="page active">
 
-        <!-- ===== CARD ===== -->
-        <div class="card">
-
-            <div class="card-title">
-                <i class="fas fa-search"></i> HASIL SELEKSI KIR 2026
-            </div>
-            <div class="card-sub">
-                Masukkan Nama dan Tanggal Lahir peserta.
+            <div class="header">
+                <div class="header-icon">
+                    <i class="fas fa-flask"></i>
+                </div>
+                <h1>PENGGUMAHAN <span>KIR</span></h1>
+                <div class="sub-title">KARYA ILMIAH REMAJA</div>
+                <div class="badge"><i class="fas fa-calendar-alt"></i> 2026</div>
             </div>
 
-            <!-- ===== FORM ===== -->
-            <form id="kirForm" autocomplete="off">
+            <div class="card">
 
-                <!-- Nama -->
-                <div class="form-group">
-                    <label for="nama">
-                        <i class="fas fa-user"></i> Nama
-                    </label>
-                    <input
-                    type="text"
-                    id="nama"
-                    placeholder="Nama lengkap peserta"
-                    required
-                    />
-                    <span class="hint">Nama sesuai dengan pendaftaran</span>
+                <div class="card-title">
+                    <i class="fas fa-search"></i> HASIL SELEKSI KIR 2026
+                </div>
+                <div class="card-sub">
+                    Masukkan Nama dan Tanggal Lahir peserta.
                 </div>
 
-                <!-- Tanggal Lahir -->
-                <div class="form-group">
-                    <label for="tglLahir">
-                        <i class="fas fa-calendar-day"></i> Tanggal Lahir
-                    </label>
-                    <input
-                    type="text"
-                    id="tglLahir"
-                    placeholder="DD / MM / YYYY"
-                    required
-                    />
-                    <span class="hint">Tanggal / Bulan / Tahun</span>
-                </div>
+                <form id="kirForm" autocomplete="off">
 
-                <!-- Submit -->
-                <button type="submit" class="btn-submit">
-                    <i class="fas fa-arrow-right"></i> LIHAT HASIL SELEKSI
-                </button>
+                    <div class="form-group">
+                        <label for="nama">
+                            <i class="fas fa-user"></i> Nama
+                        </label>
+                        <input
+                        type="text"
+                        id="nama"
+                        placeholder="Nama lengkap peserta"
+                        required
+                        />
+                        <span class="hint">Nama sesuai dengan pendaftaran</span>
+                    </div>
 
-            </form>
+                    <div class="form-group">
+                        <label for="tglLahir">
+                            <i class="fas fa-calendar-day"></i> Tanggal Lahir
+                        </label>
+                        <input
+                        type="text"
+                        id="tglLahir"
+                        placeholder="DD / MM / YYYY"
+                        required
+                        />
+                        <span class="hint">Tanggal / Bulan / Tahun</span>
+                    </div>
 
-            <!-- PDF Link -->
-            <a href="#" class="pdf-link" id="pdfLink">
-                <i class="fas fa-file-pdf"></i> PENGUMUMAN HASIL SELEKSI KIR 2026 (PDF)
-            </a>
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-arrow-right"></i> LIHAT HASIL SELEKSI
+                    </button>
 
-            <!-- ===== RESULT ===== -->
-            <div class="result-box" id="resultBox">
-                <div class="result-title" id="resultTitle">
-                    <i class="fas fa-bullhorn"></i> <span id="resultHeading">Hasil Seleksi</span>
-                </div>
-                <div class="result-detail" id="resultDetail">
-                    <!-- Dynamic content -->
-                </div>
+                </form>
+
+                <a href="#" class="pdf-link" id="pdfLinkForm">
+                    <i class="fas fa-file-pdf"></i> PENGUMUMAN HASIL SELEKSI KIR 2026 (PDF)
+                </a>
+
+            </div>
+
+            <div class="footer">
+                &copy; 2026 <a href="#">KIR</a> &mdash; Seleksi Karya Ilmiah Remaja
             </div>
 
         </div>
 
-        <!-- ===== FOOTER ===== -->
-        <div class="footer">
-            &copy; 2026 <a href="#">KIR</a> &mdash; Seleksi Karya Ilmiah Remaja
+        <!-- ============================================================ -->
+        <!-- ===== PAGE 2: RESULT ===== -->
+        <!-- ============================================================ -->
+        <div id="page-result" class="page">
+
+            <div class="header">
+                <div class="header-icon">
+                    <i class="fas fa-flask"></i>
+                </div>
+                <h1>PENGGUMAHAN <span>KIR</span></h1>
+                <div class="sub-title">HASIL SELEKSI</div>
+                <div class="badge"><i class="fas fa-calendar-alt"></i> 2026</div>
+            </div>
+
+            <div class="card" id="resultCard">
+
+                <!-- konten akan diisi oleh JavaScript -->
+                <div id="resultContent"></div>
+
+                <div class="result-actions">
+                    <button class="btn-back" id="btnBack"><i class="fas fa-arrow-left"></i> Kembali</button>
+                    <a href="#" class="btn-pdf" id="pdfLinkResult"><i class="fas fa-file-pdf"></i> Unduh PDF</a>
+                </div>
+
+            </div>
+
+            <div class="footer">
+                &copy; 2026 <a href="#">KIR</a> &mdash; Seleksi Karya Ilmiah Remaja
+            </div>
+
         </div>
 
     </div>
@@ -504,150 +651,152 @@
                 nama: 'Aisha Putri Ramadhani',
                 tglLahir: '15/03/2008',
                 status: 'Lulus',
+                nisn: '00445921553',
+                norek: '426000003',
                 jurusan: 'Ilmu Pengetahuan Alam',
-                judul: 'Pengaruh Ekstrak Daun Kelor terhadap Pertumbuhan Tanaman'
+                judul: 'Pengaruh Ekstrak Daun Kelor terhadap Pertumbuhan Tanaman',
+                asalSekolah: 'MAN 3 DUMMY',
+                kabupaten: 'Kota Dummy',
+                provinsi: 'Prov. Dummy',
+                universitas: 'Universitas Dummy'
             }, {
                 nama: 'Budi Santoso',
                 tglLahir: '22/07/2007',
                 status: 'Lulus',
+                nisn: '00445921554',
+                norek: '426000004',
                 jurusan: 'Ilmu Pengetahuan Sosial',
-                judul: 'Analisis Pola Konsumsi Masyarakat di Era Digital'
+                judul: 'Analisis Pola Konsumsi Masyarakat di Era Digital',
+                asalSekolah: 'SMAN 2 DUMMY',
+                kabupaten: 'Kota Dummy',
+                provinsi: 'Prov. Dummy',
+                universitas: 'Universitas Dummy'
             }, {
                 nama: 'Citra Dewi Lestari',
                 tglLahir: '10/11/2008',
                 status: 'Lulus',
+                nisn: '00445921555',
+                norek: '426000005',
                 jurusan: 'Ilmu Pengetahuan Alam',
-                judul: 'Rancang Bangun Alat Penjernih Air Sederhana'
+                judul: 'Rancang Bangun Alat Penjernih Air Sederhana',
+                asalSekolah: 'MAN 1 DUMMY',
+                kabupaten: 'Kota Dummy',
+                provinsi: 'Prov. Dummy',
+                universitas: 'Universitas Dummy'
             }, {
                 nama: 'Dwiki Al Ghifari',
                 tglLahir: '05/02/2007',
                 status: 'Tidak Lulus',
+                nisn: '00445921556',
+                norek: '426000006',
                 jurusan: '-',
-                judul: '-'
+                judul: '-',
+                asalSekolah: 'SMKN 3 DUMMY',
+                kabupaten: 'Kota Dummy',
+                provinsi: 'Prov. Dummy',
+                universitas: '-'
             }, {
                 nama: 'Eka Nur Fitriani',
                 tglLahir: '19/09/2008',
                 status: 'Lulus',
+                nisn: '00445921557',
+                norek: '426000007',
                 jurusan: 'Ilmu Pengetahuan Sosial',
-                judul: 'Pengaruh Media Sosial terhadap Minat Baca Remaja'
+                judul: 'Pengaruh Media Sosial terhadap Minat Baca Remaja',
+                asalSekolah: 'SMAN 5 DUMMY',
+                kabupaten: 'Kota Dummy',
+                provinsi: 'Prov. Dummy',
+                universitas: 'Universitas Dummy'
             }, {
                 nama: 'Farhan Ramadhan',
                 tglLahir: '30/12/2007',
                 status: 'Tidak Lulus',
+                nisn: '00445921558',
+                norek: '426000008',
                 jurusan: '-',
-                judul: '-'
+                judul: '-',
+                asalSekolah: 'MAN 2 DUMMY',
+                kabupaten: 'Kota Dummy',
+                provinsi: 'Prov. Dummy',
+                universitas: '-'
             }, {
                 nama: 'Gita Puspita Sari',
                 tglLahir: '08/06/2008',
                 status: 'Lulus',
+                nisn: '00445921559',
+                norek: '426000009',
                 jurusan: 'Ilmu Pengetahuan Alam',
-                judul: 'Identifikasi Senyawa Aktif pada Kunyit sebagai Antibakteri'
+                judul: 'Identifikasi Senyawa Aktif pada Kunyit sebagai Antibakteri',
+                asalSekolah: 'SMAN 8 DUMMY',
+                kabupaten: 'Kota Dummy',
+                provinsi: 'Prov. Dummy',
+                universitas: 'Universitas Dummy'
             }, {
                 nama: 'Hafiz Al-Fath',
                 tglLahir: '14/04/2007',
                 status: 'Lulus',
+                nisn: '00445921560',
+                norek: '426000010',
                 jurusan: 'Ilmu Pengetahuan Sosial',
-                judul: 'Strategi Pemberdayaan UMKM di Wilayah Perkotaan'
+                judul: 'Strategi Pemberdayaan UMKM di Wilayah Perkotaan',
+                asalSekolah: 'MAN 4 DUMMY',
+                kabupaten: 'Kota Dummy',
+                provinsi: 'Prov. Dummy',
+                universitas: 'Universitas Dummy'
             }, {
                 nama: 'Indah Permata Hati',
                 tglLahir: '27/01/2008',
                 status: 'Tidak Lulus',
+                nisn: '00445921561',
+                norek: '426000011',
                 jurusan: '-',
-                judul: '-'
+                judul: '-',
+                asalSekolah: 'SMKN 7 DUMMY',
+                kabupaten: 'Kota Dummy',
+                provinsi: 'Prov. Dummy',
+                universitas: '-'
             }, {
                 nama: 'Jaka Surya Atmaja',
                 tglLahir: '03/08/2007',
                 status: 'Lulus',
+                nisn: '00445921562',
+                norek: '426000012',
                 jurusan: 'Ilmu Pengetahuan Alam',
-                judul: 'Efektivitas Kompos dari Sampah Organik terhadap Kesuburan Tanah'
+                judul: 'Efektivitas Kompos dari Sampah Organik terhadap Kesuburan Tanah',
+                asalSekolah: 'SMAN 10 DUMMY',
+                kabupaten: 'Kota Dummy',
+                provinsi: 'Prov. Dummy',
+                universitas: 'Universitas Dummy'
             }];
 
             // -------- DOM refs --------
+            const pageForm = document.getElementById('page-form');
+            const pageResult = document.getElementById('page-result');
+            const resultContent = document.getElementById('resultContent');
             const form = document.getElementById('kirForm');
             const namaInput = document.getElementById('nama');
             const tglInput = document.getElementById('tglLahir');
-            const resultBox = document.getElementById('resultBox');
-            const resultHeading = document.getElementById('resultHeading');
-            const resultDetail = document.getElementById('resultDetail');
-            const pdfLink = document.getElementById('pdfLink');
+            const btnBack = document.getElementById('btnBack');
+            const pdfLinkForm = document.getElementById('pdfLinkForm');
+            const pdfLinkResult = document.getElementById('pdfLinkResult');
 
             // -------- helpers --------
             function normalizeDate(str) {
-                // cleanup: remove extra spaces, replace various separators with '/'
                 let cleaned = str.trim()
                     .replace(/[.\-_,;:]/g, '/')
                     .replace(/\s+/g, ' ')
                     .replace(/\/\s+/g, '/')
                     .replace(/\s+\//g, '/');
-                // if user typed "DD/MM/YYYY" or "DD-MM-YYYY" etc.
-                // we want to support both DD/MM/YYYY and DD/MM/YY? 
-                // We'll just compare after cleaning.
                 return cleaned;
             }
 
             function normalizeName(str) {
-                return str.trim()
-                    .replace(/\s+/g, ' ')
-                    .toLowerCase();
+                return str.trim().replace(/\s+/g, ' ').toLowerCase();
             }
 
-            // -------- format result --------
-            function renderResult(data, found) {
-                resultBox.className = 'result-box show';
-
-                if (found) {
-                    const isLulus = data.status === 'Lulus';
-                    resultBox.className = `result-box show ${isLulus ? 'success' : 'fail'}`;
-                    resultHeading.textContent = isLulus ? '✅ SELAMAT! Anda Lulus Seleksi' : '❌ Mohon Maaf, Anda Belum Lulus';
-
-                    let statusBadge = isLulus ?
-                        `<span class="result-status lulus">LULUS</span>` :
-                        `<span class="result-status tidak-lulus">TIDAK LULUS</span>`;
-
-                    let detailHtml = `
-                        <p><strong>Nama:</strong> ${data.nama}</p>
-                        <p><strong>Tanggal Lahir:</strong> ${data.tglLahir}</p>
-                        <p><strong>Status:</strong> ${statusBadge}</p>
-                    `;
-
-                    if (isLulus) {
-                        detailHtml += `
-                            <p><strong>Jurusan:</strong> ${data.jurusan}</p>
-                            <p><strong>Judul Karya:</strong> ${data.judul}</p>
-                        `;
-                    } else {
-                        detailHtml += `
-                            <p style="color:#7f8c8d; font-style:italic; margin-top:6px;">
-                                Tetap semangat dan terus berkarya!
-                            </p>
-                        `;
-                    }
-
-                    resultDetail.innerHTML = detailHtml;
-
-                } else {
-                    // Tidak ditemukan
-                    resultBox.className = 'result-box show fail';
-                    resultHeading.textContent = '⚠️ Data Tidak Ditemukan';
-                    resultDetail.innerHTML = `
-                        <p style="color:#e74c3c;">
-                            <i class="fas fa-exclamation-circle"></i> 
-                            Peserta dengan nama dan tanggal lahir yang Anda masukkan 
-                            <strong>tidak terdaftar</strong> dalam basis data seleksi KIR 2026.
-                        </p>
-                        <p style="color:#7f8c8d; font-size:13px; margin-top:8px;">
-                            Pastikan nama dan tanggal lahir sesuai dengan pendaftaran.
-                        </p>
-                    `;
-                }
-            }
-
-            // -------- main search --------
-            function cariPeserta(nama, tgl) {
+            function findPeserta(nama, tgl) {
                 const namaNorm = normalizeName(nama);
                 const tglNorm = normalizeDate(tgl);
-
-                // Cari di data
                 for (let p of pesertaData) {
                     const pNamaNorm = normalizeName(p.nama);
                     const pTglNorm = normalizeDate(p.tglLahir);
@@ -658,6 +807,173 @@
                 return null;
             }
 
+            // -------- render result --------
+            function renderResult(data, found) {
+                let html = '';
+
+                if (found) {
+                    const isLulus = data.status === 'Lulus';
+
+                    // Header
+                    html += `<div class="result-header">`;
+                    if (isLulus) {
+                        html += `
+                            <div class="icon-big lulus"><i class="fas fa-check-circle"></i></div>
+                            <h2 class="lulus">SELAMAT! ANDA DINYATAKAN LULUS SELEKSI KIR 2026</h2>
+                        `;
+                    } else {
+                        html += `
+                            <div class="icon-big tidak"><i class="fas fa-times-circle"></i></div>
+                            <h2 class="tidak">ANDA DINYATAKAN TIDAK LULUS SELEKSI KIR 2026</h2>
+                            <div class="sub-head">Masih ada kesempatan untuk mengikuti seleksi berikutnya.</div>
+                        `;
+                    }
+                    html += `</div>`;
+
+                    // Detail rows
+                    html += `<div class="result-detail">`;
+
+                    // NISN & NOREG
+                    if (data.nisn && data.norek) {
+                        html += `
+                            <div class="result-row">
+                                <span class="label">NISN - NOREG</span>
+                                <span class="value">${data.nisn} - ${data.norek}</span>
+                            </div>
+                        `;
+                    }
+
+                    // Nama
+                    html += `
+                        <div class="result-row">
+                            <span class="label">Nama</span>
+                            <span class="value"><span class="highlight">${data.nama}</span></span>
+                        </div>
+                    `;
+
+                    // Jurusan / Program
+                    if (isLulus && data.jurusan) {
+                        html += `
+                            <div class="result-row">
+                                <span class="label">Jurusan / Program</span>
+                                <span class="value">${data.jurusan}</span>
+                            </div>
+                        `;
+                    }
+
+                    // Universitas
+                    if (isLulus && data.universitas && data.universitas !== '-') {
+                        html += `
+                            <div class="result-row">
+                                <span class="label">Universitas</span>
+                                <span class="value">${data.universitas}</span>
+                            </div>
+                        `;
+                    }
+
+                    // Tanggal Lahir
+                    html += `
+                        <div class="result-row">
+                            <span class="label">Tanggal Lahir</span>
+                            <span class="value">${data.tglLahir}</span>
+                        </div>
+                    `;
+
+                    // Asal Sekolah
+                    if (data.asalSekolah) {
+                        html += `
+                            <div class="result-row">
+                                <span class="label">Asal Sekolah</span>
+                                <span class="value">${data.asalSekolah}</span>
+                            </div>
+                        `;
+                    }
+
+                    // Kabupaten/Kota
+                    if (data.kabupaten) {
+                        html += `
+                            <div class="result-row">
+                                <span class="label">Kabupaten/Kota</span>
+                                <span class="value">${data.kabupaten}</span>
+                            </div>
+                        `;
+                    }
+
+                    // Provinsi
+                    if (data.provinsi) {
+                        html += `
+                            <div class="result-row">
+                                <span class="label">Provinsi</span>
+                                <span class="value">${data.provinsi}</span>
+                            </div>
+                        `;
+                    }
+
+                    // Judul karya (untuk lulus)
+                    if (isLulus && data.judul && data.judul !== '-') {
+                        html += `
+                            <div class="result-row">
+                                <span class="label">Judul Karya</span>
+                                <span class="value">${data.judul}</span>
+                            </div>
+                        `;
+                    }
+
+                    html += `</div>`;
+
+                    // Extra info for lulus
+                    if (isLulus) {
+                        html += `
+                            <div class="result-extra">
+                                <i class="fas fa-info-circle"></i> 
+                                <strong>Silakan lakukan pendaftaran ulang.</strong><br />
+                                Informasi pendaftaran ulang di PTN/Politeknik Negeri dapat dilihat pada 
+                                <a href="#" onclick="alert('Simulasi: https://dummy.ac.id/'); return false;">https://dummy.ac.id/</a>
+                                <br /><br />
+                                Status penerimaan Anda sebagai mahasiswa akan ditetapkan setelah PTN tujuan melakukan verifikasi data akademik (rapor dan/atau portofolio). 
+                                Baca peraturan tentang penerimaan mahasiswa baru di laman PTN tujuan.
+                                <br /><br />
+                                Khusus peserta KIP Kuliah, PTN tujuan juga dapat melakukan verifikasi data ekonomi dan/atau kunjungan ke tempat tinggal Anda sebelum penetapan penerimaan.
+                            </div>
+                        `;
+                    } else {
+                        // Extra for tidak lulus
+                        html += `
+                            <div class="result-extra" style="border-left-color: #e67e22; background: #fef9e7;">
+                                <i class="fas fa-lightbulb" style="color:#e67e22;"></i>
+                                <strong>Masih ada kesempatan!</strong> Anda dapat mengikuti seleksi mandiri atau program lainnya. 
+                                Tetap semangat dan terus kembangkan karya ilmiah Anda.
+                            </div>
+                        `;
+                    }
+
+                } else {
+                    // NOT FOUND
+                    html += `
+                        <div class="result-header not-found">
+                            <div class="icon-big"><i class="fas fa-exclamation-triangle"></i></div>
+                            <h2 style="color:#b9770e;">DATA TIDAK DITEMUKAN</h2>
+                            <div class="sub-head">Pastikan Nama dan Tanggal Lahir sesuai dengan pendaftaran.</div>
+                        </div>
+                        <div class="result-extra" style="border-left-color: #f39c12; background: #fef9e7;">
+                            <i class="fas fa-search" style="color:#f39c12;"></i>
+                            Tidak ada peserta dengan Nama dan Tanggal Lahir yang Anda masukkan. 
+                            Periksa kembali data Anda atau hubungi panitia KIR 2026.
+                        </div>
+                    `;
+                }
+
+                resultContent.innerHTML = html;
+            }
+
+            // -------- switch page --------
+            function showPage(pageId) {
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                document.getElementById(pageId).classList.add('active');
+                // scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
             // -------- handle submit --------
             function handleSubmit(e) {
                 e.preventDefault();
@@ -665,7 +981,6 @@
                 const nama = namaInput.value.trim();
                 const tgl = tglInput.value.trim();
 
-                // Validasi sederhana
                 if (!nama) {
                     alert('Silakan masukkan Nama peserta.');
                     namaInput.focus();
@@ -677,27 +992,36 @@
                     return;
                 }
 
-                // Cari
-                const result = cariPeserta(nama, tgl);
+                const result = findPeserta(nama, tgl);
 
                 if (result) {
                     renderResult(result, true);
                 } else {
-                    // data not found — tampilkan pesan
                     renderResult(null, false);
                 }
+
+                showPage('page-result');
             }
 
-            // -------- event listener --------
+            // -------- event listeners --------
             form.addEventListener('submit', handleSubmit);
 
-            // -------- PDF link (mock) --------
-            pdfLink.addEventListener('click', function(e) {
-                e.preventDefault();
-                alert('📄 Pengumuman Hasil Seleksi KIR 2026 (PDF) — (simulasi unduhan)');
+            btnBack.addEventListener('click', function() {
+                showPage('page-form');
             });
 
-            // -------- auto-focus --------
+            // PDF links (simulasi)
+            pdfLinkForm.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('📄 Pengumuman Hasil Seleksi KIR 2026 (PDF) — (simulasi)');
+            });
+
+            pdfLinkResult.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('📄 Pengumuman Hasil Seleksi KIR 2026 (PDF) — (simulasi)');
+            });
+
+            // auto-focus
             namaInput.focus();
 
         })();
