@@ -2,18 +2,26 @@
 // KONFIGURASI SISTEM
 // ==========================================
 
-// MASUKKAN_SUPABASE_URL (Ganti dengan URL Project Anda dari Dashboard Supabase)
-const SUPABASE_URL = "https://gantidenganurlprojectmu.supabase.co"; 
-
-// MASUKKAN_SUPABASE_ANON_KEY (Ganti dengan anon/public key dari Dashboard Supabase)
-const SUPABASE_ANON_KEY = "eyJh...gantidengankeyanonmu..."; 
-
-// Konstanta
 const BATAS_KELULUSAN = 75;
 const NOMOR_SURAT = "001/KIR/SMAN1-LMH/VIII/2026";
 
-// Inisialisasi Supabase Client
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// ==========================================
+// DATA DUMMY (PENGGANTI SUPABASE)
+// ==========================================
+const dataSiswa = [
+    {
+        nama: "Nabil Darul Faris",
+        kelas: "XII F7",
+        nilai: 85, // Nilai >= 75 (LULUS)
+        tahun: "2026"
+    },
+    {
+        nama: "Putera Hagia Nugraha",
+        kelas: "XII F8",
+        nilai: 65, // Nilai < 75 (TIDAK LULUS)
+        tahun: "2026"
+    }
+];
 
 // ==========================================
 // ELEMEN DOM
@@ -47,11 +55,11 @@ suratNomor.innerText = `Nomor: ${NOMOR_SURAT}`;
 // EVENT LISTENERS
 // ==========================================
 
-cekForm.addEventListener('submit', async function(e) {
+cekForm.addEventListener('submit', function(e) {
     e.preventDefault();
     
-    const inputNama = namaInput.value.trim();
-    const inputKelas = kelasInput.value.trim();
+    const inputNama = namaInput.value.trim().toLowerCase();
+    const inputKelas = kelasInput.value.trim().toLowerCase();
 
     // Validasi kosong
     if (!inputNama || !inputKelas) {
@@ -62,33 +70,22 @@ cekForm.addEventListener('submit', async function(e) {
     hideError();
     setLoading(true);
 
-    try {
-        // Query ke Supabase (Pencarian Case Insensitive menggunakan .ilike)
-        const { data, error } = await supabase
-            .from('hasil_tes')
-            .select('*')
-            .ilike('nama', inputNama)
-            .ilike('kelas', inputKelas)
-            .limit(1)
-            .single(); // Ambil 1 data saja
+    // Simulasi loading/delay jaringan selama 1.5 detik
+    setTimeout(() => {
+        // Mencari data di array lokal (Case Insensitive)
+        const hasilPencarian = dataSiswa.find(siswa => 
+            siswa.nama.toLowerCase() === inputNama && 
+            siswa.kelas.toLowerCase() === inputKelas
+        );
 
-        if (error) {
-            if (error.code === 'PGRST116') { // Kode error Supabase jika data tidak ditemukan (single() fetch)
-                showError("Data siswa tidak ditemukan. Periksa kembali nama dan kelas yang Anda masukkan.");
-            } else {
-                console.error(error);
-                showError("Terjadi kesalahan saat mengambil data. Silakan coba lagi nanti.");
-            }
-        } else if (data) {
-            generateSurat(data);
+        if (hasilPencarian) {
+            generateSurat(hasilPencarian);
+        } else {
+            showError("Data siswa tidak ditemukan. Periksa kembali nama dan kelas yang Anda masukkan.");
         }
-
-    } catch (err) {
-        console.error(err);
-        showError("Terjadi kesalahan jaringan atau koneksi.");
-    } finally {
+        
         setLoading(false);
-    }
+    }, 1500); 
 });
 
 btnKembali.addEventListener('click', () => {
@@ -117,7 +114,7 @@ function generateSurat(data) {
     resKelas.innerText = data.kelas.toUpperCase();
     resNilai.innerText = data.nilai;
 
-    // 2. Logika Kelulusan Front-end
+    // 2. Logika Kelulusan
     if (data.nilai >= BATAS_KELULUSAN) {
         resStatusText.innerText = "LULUS";
         resStatusBox.className = "status-box status-lulus";
@@ -161,7 +158,7 @@ function setLoading(isLoading) {
     }
 }
 
-// Ubah "andi saputra" menjadi "Andi Saputra" agar rapi di surat
+// Ubah huruf pertama tiap kata menjadi kapital (contoh: "nabil darul" -> "Nabil Darul")
 function uppercaseWords(str) {
     return str.replace(/\w\S*/g, function(txt) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
