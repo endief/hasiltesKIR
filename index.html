@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hasil Tes KIR — SMAN 1 Lemahabang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============ TOP BAR IDENTITAS SEKOLAH ============ -->
+  <header class="topbar" id="topbar">
+    <div class="topbar__inner">
+      <div class="topbar__logo">
+        <img src="assets/logo-sekolah.png" alt="Logo SMAN 1 Lemahabang" id="logoImgTop"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="logo-placeholder" style="display:none;">LOGO</div>
+      </div>
+      <div class="topbar__text">
+        <p class="topbar__eyebrow">Sistem Informasi Ekstrakurikuler</p>
+        <h1 class="topbar__title">SMAN 1 Lemahabang</h1>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+
+    <!-- ============ HALAMAN 1: FORM PENGECEKAN ============ -->
+    <section class="check-view" id="checkView">
+      <div class="check-card fade-in">
+        <p class="check-card__eyebrow">Kelompok Ilmiah Remaja</p>
+        <h2 class="check-card__title">Pengecekan Hasil Tes Tertulis</h2>
+        <p class="check-card__desc">
+          Silakan masukkan nama lengkap dan kelas Anda sesuai data pendaftaran
+          untuk melihat hasil Tes Tertulis Ekstrakurikuler KIR.
+        </p>
+
+        <form id="checkForm" novalidate>
+          <div class="field">
+            <label for="inputNama">Nama Lengkap</label>
+            <input type="text" id="inputNama" name="nama" placeholder="Contoh: Andi Saputra" autocomplete="off">
+            <span class="field__error" id="errNama"></span>
+          </div>
+
+          <div class="field">
+            <label for="inputKelas">Kelas</label>
+            <input type="text" id="inputKelas" name="kelas" placeholder="Contoh: XI F7" autocomplete="off">
+            <span class="field__error" id="errKelas"></span>
+          </div>
+
+          <div class="field__error field__error--general" id="errGeneral"></div>
+
+          <button type="submit" class="btn btn--primary" id="btnCek">
+            <span class="btn__label">Cek Hasil</span>
+            <span class="btn__spinner" id="btnSpinner" hidden></span>
+          </button>
+        </form>
+
+        <p class="loading-text" id="loadingText" hidden>Sedang memeriksa hasil tes…</p>
+      </div>
+    </section>
+
+    <!-- ============ HALAMAN 2: DATA TIDAK DITEMUKAN ============ -->
+    <section class="notfound-view" id="notfoundView" hidden>
+      <div class="notfound-card fade-in">
+        <div class="notfound-icon">!</div>
+        <h2>Data Siswa Tidak Ditemukan</h2>
+        <p>Periksa kembali nama dan kelas yang Anda masukkan.</p>
+        <button class="btn btn--secondary" id="btnBackFromNotfound">Kembali</button>
+      </div>
+    </section>
+
+    <!-- ============ HALAMAN 3: SURAT HASIL TES (A4) ============ -->
+    <section class="letter-view" id="letterView" hidden>
+
+      <div class="letter-toolbar no-print">
+        <button class="btn btn--secondary" id="btnBackFromLetter">← Kembali ke Pengecekan</button>
+        <button class="btn btn--primary" id="btnPrint">Cetak / Simpan PDF</button>
+      </div>
+
+      <div class="letter-scroll-wrap">
+        <div class="letter-a4" id="letterA4">
+
+          <!-- KOP SURAT -->
+          <div class="letter-kop">
+            <div class="letter-kop__logo">
+              <img src="assets/logo-sekolah.png" alt="Logo Sekolah" id="logoImgLetter"
+                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="logo-placeholder logo-placeholder--letter" style="display:none;">LOGO<br>SEKOLAH</div>
+            </div>
+            <div class="letter-kop__text">
+              <p class="letter-kop__line1">PEMERINTAH PROVINSI JAWA BARAT</p>
+              <p class="letter-kop__line1">DINAS PENDIDIKAN</p>
+              <p class="letter-kop__line2">SMAN 1 LEMAHABANG</p>
+              <p class="letter-kop__addr">
+                JL. K.H. Wahid Hasyim 70 Sindanglaut, Kecamatan Lemahabang,<br>
+                Kabupaten Cirebon, Provinsi Jawa Barat, Kode Pos 45183 — Telp. (0231) 63546
+              </p>
+            </div>
+          </div>
+          <div class="letter-kop__rule"></div>
+
+          <!-- NOMOR & JUDUL -->
+          <div class="letter-heading">
+            <p class="letter-nomor">Nomor: <span id="letterNomor"></span></p>
+            <h2 class="letter-judul">SURAT KETERANGAN HASIL TES TERTULIS</h2>
+            <h3 class="letter-subjudul">EKSTRAKURIKULER KELOMPOK ILMIAH REMAJA</h3>
+          </div>
+
+          <!-- ISI SURAT -->
+          <div class="letter-body">
+            <p>
+              Yang bertanda tangan di bawah ini menerangkan bahwa siswa yang tercantum di bawah ini
+              telah mengikuti Tes Tertulis Ekstrakurikuler Kelompok Ilmiah Remaja:
+            </p>
+
+            <table class="letter-identitas">
+              <tbody>
+                <tr>
+                  <td class="label">Nama</td>
+                  <td class="colon">:</td>
+                  <td class="value" id="letterNama"></td>
+                </tr>
+                <tr>
+                  <td class="label">Kelas</td>
+                  <td class="colon">:</td>
+                  <td class="value" id="letterKelas"></td>
+                </tr>
+                <tr>
+                  <td class="label">Nilai Tes</td>
+                  <td class="colon">:</td>
+                  <td class="value" id="letterNilai"></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p>
+              Setelah mengikuti dan menyelesaikan Tes Tertulis Ekstrakurikuler Kelompok Ilmiah Remaja,
+              berdasarkan hasil penilaian yang telah dilakukan, siswa tersebut dinyatakan:
+            </p>
+
+            <div class="letter-status" id="letterStatus"></div>
+
+            <p>Demikian surat keterangan ini dibuat untuk dapat dipergunakan sebagaimana mestinya.</p>
+          </div>
+
+          <!-- TANDA TANGAN -->
+          <div class="letter-ttd">
+            <div class="letter-ttd__inner">
+              <p class="letter-ttd__place-date" id="letterTanggal"></p>
+              <p class="letter-ttd__jabatan">Ketua Ekstrakurikuler<br>Kelompok Ilmiah Remaja,</p>
+              <div class="letter-ttd__space"></div>
+              <p class="letter-ttd__name">AHMAD AL-GHAZALI</p>
+            </div>
+          </div>
+
+          <div class="letter-stamp" aria-hidden="true">
+            <div class="letter-stamp__ring">
+              <span>SMAN 1 LEMAHABANG</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+</body>
+</html>
