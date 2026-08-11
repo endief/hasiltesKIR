@@ -372,20 +372,20 @@
     <div class="panel">
       <div class="brand">
         <div class="brand-icon"><i class="fas fa-flask"></i></div>
-        <div class="brand-title">HASIL <span>KIR</span></div>
-        <div class="brand-sub">KARYA ILMIAH REMAJA</div>
+        <div class="brand-title">HASIL SELEKSI<span>KIR 2026</span></div>
+        <div class="brand-sub">KELOMPOK ILMIAH REMAJA</div>
       </div>
 
       <div class="form-head">
-        <h2>Hasil Seleksi KIR 2026</h2>
-        <p>Masukkan Nama dan Tanggal Lahir peserta untuk melihat hasil seleksi.</p>
+        <h2>Pemberitahuan:</h2>
+        <p>Masukkan Nama dan Tanggal Lahir untuk melihat hasil seleksi.</p>
       </div>
 
       <form id="kirForm" autocomplete="off">
         <div class="field">
           <label for="nama"><i class="fas fa-user"></i> Nama</label>
           <input type="text" id="nama" class="input" placeholder="Nama lengkap peserta" required />
-          <span class="hint">Nama sesuai dengan pendaftaran</span>
+          <span class="hint">Masukkan nama kamu dengan benar</span>
         </div>
 
         <div class="field" id="dobField">
@@ -395,7 +395,7 @@
             <div class="dob-seg" id="segMonth">Bulan</div>
             <div class="dob-seg" id="segYear">Tahun</div>
           </div>
-          <span class="hint">Ketuk kotak tanggal untuk memilih dari kalender</span>
+          <span class="hint">Ketuk kotak tanggal untuk memilih tanggal lahir</span>
         </div>
 
         <button type="submit" class="btn-submit" id="submitBtn">
@@ -407,13 +407,13 @@
         <i class="fas fa-file-pdf"></i> PENGUMUMAN HASIL SELEKSI KIR 2026 (PDF)
       </a>
     </div>
-    <div class="footer">&copy; 2026 KIR &mdash; Seleksi Karya Ilmiah Remaja</div>
+    <div class="footer">&copy; 2026 KIR &mdash; Seleksi Kelompok Ilmiah Remaja</div>
   </div>
 
   <!-- ===== PAGE 2: RESULT ===== -->
   <div id="page-result" class="page">
     <div class="panel" id="resultPanel"></div>
-    <div class="footer">&copy; 2026 KIR &mdash; Seleksi Karya Ilmiah Remaja</div>
+    <div class="footer">&copy; 2026 KIR &mdash; Seleksi Kelompok Ilmiah Remaja</div>
   </div>
 
 </div>
@@ -440,7 +440,7 @@
 <div class="loading" id="loadingOverlay">
   <div class="spinner-wrap">
     <div class="spinner"></div>
-    <span>Memeriksa data peserta&hellip;</span>
+    <span>Memeriksa data calon anggota&hellip;</span>
   </div>
 </div>
 
@@ -448,7 +448,7 @@
 (function(){
 
   const pesertaData = [
-    {nama:'Aisha Putri Ramadhani', tglLahir:'15/03/2008', status:'Lulus', nisn:'00445921553', norek:'426000003', jurusan:'Ilmu Pengetahuan Alam', judul:'Pengaruh Ekstrak Daun Kelor terhadap Pertumbuhan Tanaman', asalSekolah:'MAN 3 DUMMY', kabupaten:'Kota Dummy', provinsi:'Prov. Dummy', universitas:'Universitas Dummy'},
+    {nama:'Aisha Putri Ramadhani', tglLahir:'15/03/2008', status:'Lulus', nisn:'00445921553', norek:'426000003', ekstrakurikuler:'Kelompok Ilmiah Remaja', judul:'Pengaruh Ekstrak Daun Kelor terhadap Pertumbuhan Tanaman', asalSekolah:'MAN 3 DUMMY', kabupaten:'Kota Dummy', provinsi:'Prov. Dummy', universitas:'Universitas Dummy'},
     {nama:'Budi Santoso', tglLahir:'22/07/2007', status:'Lulus', nisn:'00445921554', norek:'426000004', jurusan:'Ilmu Pengetahuan Sosial', judul:'Analisis Pola Konsumsi Masyarakat di Era Digital', asalSekolah:'SMAN 2 DUMMY', kabupaten:'Kota Dummy', provinsi:'Prov. Dummy', universitas:'Universitas Dummy'},
     {nama:'Citra Dewi Lestari', tglLahir:'10/11/2008', status:'Lulus', nisn:'00445921555', norek:'426000005', jurusan:'Ilmu Pengetahuan Alam', judul:'Rancang Bangun Alat Penjernih Air Sederhana', asalSekolah:'MAN 1 DUMMY', kabupaten:'Kota Dummy', provinsi:'Prov. Dummy', universitas:'Universitas Dummy'},
     {nama:'Dwiki Al Ghifari', tglLahir:'05/02/2007', status:'Tidak Lulus', nisn:'00445921556', norek:'426000006', jurusan:'-', judul:'-', asalSekolah:'SMKN 3 DUMMY', kabupaten:'Kota Dummy', provinsi:'Prov. Dummy', universitas:'-'},
@@ -634,8 +634,8 @@
           </div>
 
           <div class="rnote blue">
-            <i class="fas fa-info-circle"></i> <b>Silakan lakukan pendaftaran ulang.</b><br/>
-            Informasi pendaftaran ulang dapat dilihat pada
+            <i class="fas fa-info-circle"></i> <b>Silakan harap masuk grup untuk informasi lanjutan.</b><br/>
+            Informasi kelulusan hanya anda yang tahu 
             <a href="#" onclick="alert('Simulasi tautan pendaftaran ulang'); return false;">https://kir-dummy.sch.id/</a><br/><br/>
             Status kelulusan Anda akan ditetapkan setelah panitia melakukan verifikasi data akademik (rapor dan/atau portofolio karya ilmiah).
           </div>
