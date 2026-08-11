@@ -254,15 +254,6 @@
   .btn-submit i{margin-right:8px;}
   .btn-submit:disabled{opacity:0.7; cursor:default; transform:none;}
 
-  .pdf-link{
-    font-family:'Manrope',sans-serif;
-    display:block; text-align:center; margin:16px 0 26px;
-    font-size:12.5px; color:var(--blue-light); text-decoration:none;
-    font-weight:700; letter-spacing:0.3px; transition:color .2s ease;
-  }
-  .pdf-link i{margin-right:6px; color:#e07a6b;}
-  .pdf-link:hover{color:#fff;}
-
   .footer{
     font-family:'Nunito Sans',sans-serif;
     text-align:center; margin-top:18px; font-size:11.5px;
@@ -339,7 +330,7 @@
     display:flex; gap:10px; padding:0 26px 26px;
     background:var(--panel-solid); border-radius:0 0 26px 26px;
   }
-  .btn-back, .btn-pdf{
+  .btn-back{
     font-family:'Manrope',sans-serif;
     flex:1; padding:13px 14px; border-radius:14px; border:none; cursor:pointer;
     font-size:13.8px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:7px;
@@ -347,8 +338,6 @@
   }
   .btn-back{background:rgba(255,255,255,0.07); color:var(--text);}
   .btn-back:hover{background:rgba(255,255,255,0.12); transform:translateY(-2px);}
-  .btn-pdf{background:linear-gradient(135deg,#d3493a,var(--red-deep)); color:#fff;}
-  .btn-pdf:hover{filter:brightness(1.08); transform:translateY(-2px);}
 
   /* ===== LOADING OVERLAY ===== */
   .loading{
@@ -387,7 +376,6 @@
     <div class="panel">
       <div class="brand">
         <div class="brand-icon">
-          <!-- Ganti src di bawah ini dengan file logo KIR kamu (contoh: logo-kir.png) -->
           <img src="https://raw.githubusercontent.com/endief/hasiltesKIR/e80af3a1c9c384fa8614139857b3d9c84f30a889/KIR%20Logo.png" alt="Logo KIR" onerror="this.style.display='none'" />
         </div>
         <div class="brand-title">HASIL SELEKSI <span>KIR 2026</span></div>
@@ -395,8 +383,8 @@
       </div>
 
       <div class="form-head">
-        <h2>Pemberitahuan:</h2>
-        <p>Masukkan Nama dan Kelas untuk melihat hasil seleksi.</p>
+        <h2>Cek Hasil Seleksi</h2>
+        <p>Masukkan Nama dan Kelas untuk melihat hasil seleksi KIR 2026.</p>
       </div>
 
       <form id="kirForm" autocomplete="off">
@@ -421,10 +409,6 @@
           <i class="fas fa-arrow-right"></i> LIHAT HASIL SELEKSI
         </button>
       </form>
-
-      <a href="#" class="pdf-link" id="pdfLinkForm">
-        <i class="fas fa-file-pdf"></i> PENGUMUMAN HASIL SELEKSI KIR 2026 (PDF)
-      </a>
     </div>
     <div class="footer">&copy; 2026 KIR &mdash; Seleksi Kelompok Ilmiah Remaja</div>
   </div>
@@ -496,7 +480,6 @@
   let selectedKelas = '';
   const submitBtn = document.getElementById('submitBtn');
   const loadingOverlay = document.getElementById('loadingOverlay');
-  const pdfLinkForm = document.getElementById('pdfLinkForm');
   const pageForm = document.getElementById('page-form');
   const pageResult = document.getElementById('page-result');
   const resultPanel = document.getElementById('resultPanel');
@@ -588,20 +571,19 @@
           <div class="rgrid">
             ${row('Kelas', data.kelas)}
             ${row('Peringkat', data.peringkat)}
-            ${row('Nilai', data.nilai)}
+            ${row('Nilai Seleksi', data.nilai)}
             ${row('NISN', data.nisn)}
           </div>
 
           <div class="rnote blue">
-            <i class="fas fa-info-circle"></i> <b>Silakan harap masuk grup untuk informasi lanjutan.</b><br/>
-            Informasi kelulusan hanya anda yang tahu
-            <a href="#" onclick="alert('Simulasi tautan grup'); return false;">https://kir-dummy.sch.id/</a><br/><br/>
-            Status kelulusan Anda akan ditetapkan setelah panitia melakukan verifikasi data akademik (rapor dan/atau portofolio karya ilmiah).
+            <i class="fas fa-info-circle"></i> <b>Informasi Selanjutnya</b><br/>
+            Bagi peserta yang dinyatakan LULUS, silakan segera bergabung ke grup resmi KIR untuk memperoleh informasi dan arahan lebih lanjut terkait tahapan berikutnya.<br/><br/>
+            Mohon pastikan Anda telah bergabung di grup resmi.<br/>
+            <a href="https://bit.ly/seleksikir2026" target="_blank" style="color:var(--blue-light);font-weight:700;text-decoration:none;">https://bit.ly/seleksikir2026</a>
           </div>
         </div>
         <div class="ractions">
           <button class="btn-back" id="btnBack"><i class="fas fa-arrow-left"></i> Kembali</button>
-          <a href="#" class="btn-pdf" id="pdfLinkResult"><i class="fas fa-file-pdf"></i> Unduh PDF</a>
         </div>`;
     } else {
       resultPanel.innerHTML = `
@@ -617,17 +599,17 @@
           <div class="rgrid">
             ${row('Kelas', data.kelas)}
             ${row('Peringkat', data.peringkat)}
-            ${row('Nilai', data.nilai)}
+            ${row('Nilai Seleksi', data.nilai)}
             ${row('NISN', data.nisn)}
           </div>
 
           <div class="rnote orange">
-            <i class="fas fa-lightbulb"></i> <b>Tetap semangat!</b> Anda dapat mengikuti seleksi mandiri atau program pengembangan karya ilmiah lainnya di sekolah.
+            <i class="fas fa-lightbulb"></i> <b>Tetap Semangat!</b><br/>
+            Jangan berkecil hati atas hasil yang diperoleh. Tetap semangat untuk terus belajar, berkembang, dan memberikan yang terbaik.
           </div>
         </div>
         <div class="ractions">
           <button class="btn-back" id="btnBack"><i class="fas fa-arrow-left"></i> Kembali</button>
-          <a href="#" class="btn-pdf" id="pdfLinkResult"><i class="fas fa-file-pdf"></i> Unduh PDF</a>
         </div>`;
     }
     bindActions();
@@ -636,8 +618,6 @@
   function bindActions(){
     const btnBack = document.getElementById('btnBack');
     if(btnBack) btnBack.addEventListener('click', ()=> switchPage(pageResult, pageForm));
-    const pdfLinkResult = document.getElementById('pdfLinkResult');
-    if(pdfLinkResult) pdfLinkResult.addEventListener('click', (e)=>{ e.preventDefault(); alert('📄 Pengumuman Hasil Seleksi KIR 2026 (PDF) — (simulasi)'); });
   }
 
   // ---------- Smooth page transition ----------
@@ -681,11 +661,6 @@
       submitBtn.disabled = false;
       switchPage(pageForm, pageResult);
     }, 900);
-  });
-
-  pdfLinkForm.addEventListener('click', function(e){
-    e.preventDefault();
-    alert('📄 Pengumuman Hasil Seleksi KIR 2026 (PDF) — (simulasi)');
   });
 
   namaInput.focus();
