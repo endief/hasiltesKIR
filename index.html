@@ -376,6 +376,7 @@
     <div class="panel">
       <div class="brand">
         <div class="brand-icon">
+          <!-- Ganti src di bawah ini dengan file logo KIR kamu (contoh: logo-kir.png) -->
           <img src="https://raw.githubusercontent.com/endief/hasiltesKIR/e80af3a1c9c384fa8614139857b3d9c84f30a889/KIR%20Logo.png" alt="Logo KIR" onerror="this.style.display='none'" />
         </div>
         <div class="brand-title">HASIL SELEKSI <span>KIR 2026</span></div>
@@ -428,30 +429,28 @@
     <span>Pilih Kelas</span>
     <button type="button" id="kelasClose"><i class="fas fa-times"></i></button>
   </div>
-  <div class="kelas-group-label">KELAS XII</div>
-  <div class="kelas-option" data-value="XII F7"><span>XII F7</span><span class="dot"></span></div>
-  <div class="kelas-divider"></div>
-  <div class="kelas-option" data-value="XII F8"><span>XII F8</span><span class="dot"></span></div>
   <div class="kelas-group-label">KELAS X</div>
-  <div class="kelas-option" data-value="X E1"><span>X E1</span><span class="dot"></span></div>
+  <div class="kelas-option" data-value="X.E1"><span>X.E1</span><span class="dot"></span></div>
   <div class="kelas-divider"></div>
-  <div class="kelas-option" data-value="X E2"><span>X E2</span><span class="dot"></span></div>
+  <div class="kelas-option" data-value="X.E2"><span>X.E2</span><span class="dot"></span></div>
   <div class="kelas-divider"></div>
-  <div class="kelas-option" data-value="X E3"><span>X E3</span><span class="dot"></span></div>
+  <div class="kelas-option" data-value="X.E3"><span>X.E3</span><span class="dot"></span></div>
   <div class="kelas-divider"></div>
-  <div class="kelas-option" data-value="X E4"><span>X E4</span><span class="dot"></span></div>
+  <div class="kelas-option" data-value="X.E4"><span>X.E4</span><span class="dot"></span></div>
   <div class="kelas-divider"></div>
-  <div class="kelas-option" data-value="X E5"><span>X E5</span><span class="dot"></span></div>
+  <div class="kelas-option" data-value="X.E5"><span>X.E5</span><span class="dot"></span></div>
   <div class="kelas-divider"></div>
-  <div class="kelas-option" data-value="X E6"><span>X E6</span><span class="dot"></span></div>
+  <div class="kelas-option" data-value="X.E6"><span>X.E6</span><span class="dot"></span></div>
   <div class="kelas-divider"></div>
-  <div class="kelas-option" data-value="X E7"><span>X E7</span><span class="dot"></span></div>
+  <div class="kelas-option" data-value="X.E7"><span>X.E7</span><span class="dot"></span></div>
   <div class="kelas-divider"></div>
-  <div class="kelas-option" data-value="X E8"><span>X E8</span><span class="dot"></span></div>
+  <div class="kelas-option" data-value="X.E8"><span>X.E8</span><span class="dot"></span></div>
   <div class="kelas-divider"></div>
-  <div class="kelas-option" data-value="X E9"><span>X E9</span><span class="dot"></span></div>
+  <div class="kelas-option" data-value="X.E9"><span>X.E9</span><span class="dot"></span></div>
   <div class="kelas-divider"></div>
-  <div class="kelas-option" data-value="X E10"><span>X E10</span><span class="dot"></span></div>
+  <div class="kelas-option" data-value="X.E10"><span>X.E10</span><span class="dot"></span></div>
+  <div class="kelas-group-label">KELAS XI</div>
+  <div class="kelas-option" data-value="XI.F8"><span>XI.F8</span><span class="dot"></span></div>
 </div>
 
 <div class="loading" id="loadingOverlay">
@@ -464,10 +463,50 @@
 <script>
 (function(){
 
-  // ---------- Data peserta (contoh) ----------
+  // ---------- Data peserta (final, 42 peserta lulus) ----------
   const pesertaData = [
-    {nama:'Nabil Darul Faris', nilai:'350', status:'Lulus', kelas:'XII F7', peringkat:'01', nisn:'3089713780'},
-    {nama:'Putera Hagia Nugraha', nilai:'125', status:'Tidak Lulus', kelas:'XII F8', peringkat:'41', nisn:'001234567'}
+    {nama:"NIKOLAS OBIE MATEO", kelas:"X.E2", status:"Lulus", nilai:"88,5", peringkat:"01", nisn:"0116795583"},
+    {nama:"DHEANEISHA RAHDATUL AISY", kelas:"X.E1", status:"Lulus", nilai:"85,1", peringkat:"02", nisn:"0105059361"},
+    {nama:"VERONIKA TIMORA BR TAMBUNAN", kelas:"XI.F8", status:"Lulus", nilai:"80", peringkat:"03", nisn:"3098512081"},
+    {nama:"FARROOSUL MUFLIH", kelas:"X.E1", status:"Lulus", nilai:"74,2", peringkat:"04", nisn:"3110949622"},
+    {nama:"VIKA DIYAUS SAADAH", kelas:"X.E2", status:"Lulus", nilai:"74,2", peringkat:"05", nisn:"0106219737"},
+    {nama:"KEILLA FEBRY ANABEL", kelas:"X.E10", status:"Lulus", nilai:"74,2", peringkat:"06", nisn:"0116604677"},
+    {nama:"AFIFAH NAILA IZZAH", kelas:"X.E7", status:"Lulus", nilai:"71,4", peringkat:"07", nisn:"0102904066"},
+    {nama:"KHOERUNNISA", kelas:"X.E7", status:"Lulus", nilai:"71,4", peringkat:"08", nisn:"0106962089"},
+    {nama:"MUHAMMAD KHAIRUR RIVALDI", kelas:"X.E9", status:"Lulus", nilai:"71,4", peringkat:"09", nisn:"0114457211"},
+    {nama:"MUHAMMAD FATHUR SHIDDIQ", kelas:"X.E9", status:"Lulus", nilai:"68,5", peringkat:"10", nisn:"0113658889"},
+    {nama:"AQILLAH SYIFA WIDIAWATI", kelas:"X.E2", status:"Lulus", nilai:"65", peringkat:"11", nisn:"0117282169"},
+    {nama:"NUR ZAKIYATUL ALIYAH", kelas:"X.E8", status:"Lulus", nilai:"65", peringkat:"12", nisn:"0113130882"},
+    {nama:"MAULIDA SRI LESTARI", kelas:"X.E1", status:"Lulus", nilai:"62,8", peringkat:"13", nisn:"0117278969"},
+    {nama:"SHERINA PUTRI", kelas:"X.E3", status:"Lulus", nilai:"62,8", peringkat:"14", nisn:"0109053541"},
+    {nama:"SAUSAN ATIKA MAESARA", kelas:"X.E9", status:"Lulus", nilai:"62,8", peringkat:"15", nisn:"0116794276"},
+    {nama:"ANNISA NURKHOLIFAH", kelas:"X.E3", status:"Lulus", nilai:"60", peringkat:"16", nisn:"0111832283"},
+    {nama:"MUHAMAD ZIDAN ALBA'ASITH", kelas:"X.E6", status:"Lulus", nilai:"60", peringkat:"17", nisn:"0112380216"},
+    {nama:"AYUNI HILYA RAHMAH", kelas:"XI.F8", status:"Lulus", nilai:"60", peringkat:"18", nisn:"0094396449"},
+    {nama:"SALMA NUR AZIZAH", kelas:"X.E4", status:"Lulus", nilai:"57,1", peringkat:"19", nisn:"0116963498"},
+    {nama:"SALSABILA NUR RAHMADINA", kelas:"X.E5", status:"Lulus", nilai:"57,1", peringkat:"20", nisn:"0115002467"},
+    {nama:"AL'LIZA HASNA NURAULANI", kelas:"X.E8", status:"Lulus", nilai:"57,1", peringkat:"21", nisn:"0112982800"},
+    {nama:"ANIS KHOIRUNNISA", kelas:"X.E1", status:"Lulus", nilai:"54,2", peringkat:"22", nisn:"0091516607"},
+    {nama:"LUTFIANA NAYSILLA", kelas:"X.E8", status:"Lulus", nilai:"54,2", peringkat:"23", nisn:"0114806851"},
+    {nama:"DIVA YASMIN DZIHRINA", kelas:"X.E9", status:"Lulus", nilai:"54,2", peringkat:"24", nisn:"0101489301"},
+    {nama:"SHINTA DEWI LESTARI", kelas:"X.E4", status:"Lulus", nilai:"51,4", peringkat:"25", nisn:"0113378181"},
+    {nama:"CHETRINA ADELIA SIREGAR", kelas:"X.E7", status:"Lulus", nilai:"51,4", peringkat:"26", nisn:"0129252913"},
+    {nama:"MUHAMMAD FARHANSYAH", kelas:"X.E8", status:"Lulus", nilai:"51,4", peringkat:"27", nisn:"3126923098"},
+    {nama:"RAKA DWI LAGAN", kelas:"X.E4", status:"Lulus", nilai:"48,5", peringkat:"28", nisn:"0105082946"},
+    {nama:"RAFIF ALGHOWTSANI", kelas:"X.E10", status:"Lulus", nilai:"48,5", peringkat:"29", nisn:"3112084384"},
+    {nama:"NAJWA ZEFANYA RAMADANI", kelas:"X.E1", status:"Lulus", nilai:"45,7", peringkat:"30", nisn:"0111750397"},
+    {nama:"MUHAMMAD SYAM'UL AL ADZZI", kelas:"X.E2", status:"Lulus", nilai:"45,7", peringkat:"31", nisn:"0114047299"},
+    {nama:"SALSABILA ELIANA RAMADHANI", kelas:"X.E6", status:"Lulus", nilai:"45,7", peringkat:"32", nisn:"0118496577"},
+    {nama:"TABINA ULFAH", kelas:"X.E1", status:"Lulus", nilai:"42,8", peringkat:"33", nisn:"0117716018"},
+    {nama:"AHMAD RIZKY PRANAYA AL MIANO", kelas:"X.E2", status:"Lulus", nilai:"42,8", peringkat:"34", nisn:"0112236996"},
+    {nama:"KEYSHA MAHARANI", kelas:"X.E5", status:"Lulus", nilai:"42,8", peringkat:"35", nisn:"0112802814"},
+    {nama:"AUDREY SALMA SAKILA HANAN", kelas:"X.E6", status:"Lulus", nilai:"42,8", peringkat:"36", nisn:"0113053340"},
+    {nama:"QUINSA ZIVANA ABABIL", kelas:"X.E8", status:"Lulus", nilai:"42,8", peringkat:"37", nisn:"0111329995"},
+    {nama:"ARIYANTI PUSPITA PUTRI", kelas:"X.E3", status:"Lulus", nilai:"37,1", peringkat:"38", nisn:"3112848899"},
+    {nama:"NURHAMIDAH PUTRI USYANTIKA", kelas:"X.E6", status:"Lulus", nilai:"37,1", peringkat:"39", nisn:"0101524031"},
+    {nama:"ASYKAA FATIHATUL HAQ", kelas:"X.E8", status:"Lulus", nilai:"37,1", peringkat:"40", nisn:"0118059110"},
+    {nama:"REVA ZIYA ULHAQ", kelas:"X.E10", status:"Lulus", nilai:"31,4", peringkat:"41", nisn:"0107850507"},
+    {nama:"RENI OKTAVIA", kelas:"X.E6", status:"Lulus", nilai:"-", peringkat:"42", nisn:"3114704755"}
   ];
 
   const form = document.getElementById('kirForm');
@@ -571,15 +610,15 @@
           <div class="rgrid">
             ${row('Kelas', data.kelas)}
             ${row('Peringkat', data.peringkat)}
-            ${row('Nilai Seleksi', data.nilai)}
+            ${row('Nilai', data.nilai)}
             ${row('NISN', data.nisn)}
           </div>
 
           <div class="rnote blue">
-            <i class="fas fa-info-circle"></i> <b>Informasi Selanjutnya</b><br/>
-            Bagi peserta yang dinyatakan LULUS, silakan segera bergabung ke grup resmi KIR untuk memperoleh informasi dan arahan lebih lanjut terkait tahapan berikutnya.<br/><br/>
-            Mohon pastikan Anda telah bergabung di grup resmi.<br/>
-            <a href="https://bit.ly/seleksikir2026" target="_blank" style="color:var(--blue-light);font-weight:700;text-decoration:none;">https://bit.ly/seleksikir2026</a>
+            <i class="fas fa-info-circle"></i> <b>Silakan harap masuk grup untuk informasi lanjutan.</b><br/>
+            Informasi kelulusan hanya anda yang tahu
+            <a href="#" onclick="alert('Simulasi tautan grup'); return false;">https://kir-dummy.sch.id/</a><br/><br/>
+            Status kelulusan Anda akan ditetapkan setelah panitia melakukan verifikasi data akademik (rapor dan/atau portofolio karya ilmiah).
           </div>
         </div>
         <div class="ractions">
@@ -599,13 +638,12 @@
           <div class="rgrid">
             ${row('Kelas', data.kelas)}
             ${row('Peringkat', data.peringkat)}
-            ${row('Nilai Seleksi', data.nilai)}
+            ${row('Nilai', data.nilai)}
             ${row('NISN', data.nisn)}
           </div>
 
           <div class="rnote orange">
-            <i class="fas fa-lightbulb"></i> <b>Tetap Semangat!</b><br/>
-            Jangan berkecil hati atas hasil yang diperoleh. Tetap semangat untuk terus belajar, berkembang, dan memberikan yang terbaik.
+            <i class="fas fa-lightbulb"></i> <b>Tetap semangat!</b> Anda dapat mengikuti seleksi mandiri atau program pengembangan karya ilmiah lainnya di sekolah.
           </div>
         </div>
         <div class="ractions">
